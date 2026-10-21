@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مغامرة الكساحة الأدبية | 3ème</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo & Amiri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,400&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neonPink: '#ff007f',
+                        neonPurple: '#9d4edd',
+                        neonBlue: '#00f0ff',
+                        neonYellow: '#ffe600',
+                        darkBg: '#0b0c10',
+                        cardBg: 'rgba(22, 27, 46, 0.75)'
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        amiri: ['Amiri', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at top center, #1a0b2e 0%, #0b0c10 100%);
+            color: #f1f5f9;
+            user-select: none;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .poetry-font {
+            font-family: 'Amiri', serif;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(23, 25, 48, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Neon Glow Utility Classes */
+        .glow-pink {
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+            border-color: rgba(255, 0, 127, 0.6);
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            border-color: rgba(0, 240, 255, 0.6);
+        }
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
+            border-color: rgba(157, 78, 221, 0.6);
+        }
+        .glow-yellow {
+            box-shadow: 0 0 20px rgba(255, 230, 0, 0.4);
+            border-color: rgba(255, 230, 0, 0.6);
+        }
+
+        /* Text Neon Effects */
+        .text-neon-pink { text-shadow: 0 0 10px rgba(255, 0, 127, 0.7); }
+        .text-neon-blue { text-shadow: 0 0 10px rgba(0, 240, 255, 0.7); }
+        .text-neon-yellow { text-shadow: 0 0 10px rgba(255, 230, 0, 0.7); }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(-1deg); }
+            40% { transform: translate(3px, 2px) rotate(1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            80% { transform: translate(3px, 1px) rotate(-1deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+        .shake-effect {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0c10; }
+        ::-webkit-scrollbar-thumb { background: #9d4edd; border-radius: 4px; }
+
+        .btn-neon {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-neon:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.02);
+        }
+        .btn-neon:active:not(:disabled) {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Word chips for builder */
+        .word-chip {
+            transition: all 0.2s ease;
+        }
+        .word-chip:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-between items-center p-3 md:p-6 text-slate-100">
+
+    <!-- Top Navigation Header -->
+    <header class="w-full max-w-4xl flex justify-between items-center pb-4 mb-4 border-b border-purple-900/40">
+        <div class="flex items-center space-x-3 space-x-reverse">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-600 via-purple-600 to-cyan-400 flex items-center justify-center text-white text-2xl font-black shadow-lg glow-pink">
+                <i class="fa-solid fa-fire"></i>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl md:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neonPink via-neonPurple to-neonBlue">
+                        الكساحة الأدبية
+                    </h1>
+                    <span class="bg-pink-950/80 text-neonPink text-[10px] font-black px-2 py-0.5 rounded-full border border-pink-500/30">3ème</span>
+                </div>
+                <p class="text-xs text-slate-400">تحدي لغة عربية ممتع للسنة 3 ثانوي</p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-3 space-x-reverse">
+            <button id="soundToggle" onclick="toggleMute()" class="p-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-neonBlue border border-cyan-500/30 transition shadow-md">
+                <i id="soundIcon" class="fa-solid fa-volume-high"></i>
+            </button>
+            <div class="bg-slate-900/90 border border-purple-500/40 px-3.5 py-1.5 rounded-xl text-xs font-black text-amber-300 flex items-center gap-1.5 shadow-md">
+                <i class="fa-solid fa-bolt text-neonYellow"></i>
+                <span>النقاط: <span id="headerScore" class="text-neonYellow text-sm">0</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <main id="gameContainer" class="w-full max-w-4xl flex-grow flex flex-col justify-center items-center relative my-auto">
+
+        <!-- 1. START & INTRODUCTION SCREEN -->
+        <div id="startScreen" class="w-full glass-card rounded-3xl p-6 md:p-10 text-center glow-purple my-auto animate-pulse-glow">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-900/50 border border-purple-400/40 text-neonPink text-xs font-bold mb-4">
+                <i class="fa-solid fa-graduation-cap"></i> مخصص لتلامذة السنة 3 ثانوي (3ème)
+            </div>
+
+            <h2 class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neonYellow via-pink-400 to-neonBlue mb-4 poetry-font">
+                أهلاً بفرسان الـ 3ème! ⚔️
+            </h2>
+
+            <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto mb-6 leading-relaxed">
+                تسمع بكلمة <span class="text-neonPink font-bold">"الكساحة"</span> في مادة العربية وما عرفتهاش مليح؟ 
+                ما تخافش! الكساحة مش قلة أدب ولا عيب، هي <span class="text-neonBlue font-bold">الصلابة، العنفوان، وقوة الشخصية والشعر</span> اللي ظهرت في البيئة الصحراوية القاسية للشاعر الجاهلي!
+            </p>
+
+            <!-- Concept Intro Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8 text-right max-w-3xl mx-auto">
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-pink-500/30">
+                    <div class="text-neonPink font-black text-sm mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-sun text-yellow-400"></i> قسوة الطبيعة
+                    </div>
+                    <p class="text-xs text-slate-300">الصحراء والجفاف خلاو العربي كاسح، صلب ومحارب ما يرحمش.</p>
+                </div>
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-cyan-500/30">
+                    <div class="text-neonBlue font-black text-sm mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-cyan-400"></i> العنفوان والفخر
+                    </div>
+                    <p class="text-xs text-slate-300">الرد على كل عدوان بقوة مرعبة، كيف قول عمرو بن كلثوم!</p>
+                </div>
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-yellow-500/30">
+                    <div class="text-neonYellow font-black text-sm mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-nib text-yellow-300"></i> جزالة اللّغة
+                    </div>
+                    <p class="text-xs text-slate-300">كلمات فخمة، أصوات قوية، وألفاظ كاسحة تعبر على الهيبة.</p>
+                </div>
+            </div>
+
+            <button onclick="startGame()" class="btn-neon bg-gradient-to-r from-neonPink via-purple-600 to-neonBlue text-white font-black text-lg px-10 py-4 rounded-2xl shadow-xl border border-white/20 glow-pink">
+                <i class="fa-solid fa-gamepad ml-2"></i> انطلق في المغامرة التفاعلية!
+            </button>
+        </div>
+
+        <!-- 2. MAIN GAME ARENA (STAGES DISPLAY) -->
+        <div id="arenaScreen" class="w-full flex-col hidden space-y-4">
+            
+            <!-- Stage Header Progress Bar -->
+            <div class="glass-card p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-3">
+                <div class="flex items-center gap-2">
+                    <span id="stageBadge" class="bg-purple-900/90 text-neonPink text-xs font-black px-3 py-1 rounded-xl border border-pink-500/40">
+                        المرحلة 1 من 4
+                    </span>
+                    <h3 id="stageTitle" class="text-sm md:text-base font-bold text-slate-200">
+                        كتالوج الكساحة
+                    </h3>
+                </div>
+
+                <!-- Combo & Timer Badges -->
+                <div class="flex items-center gap-3">
+                    <div id="comboContainer" class="hidden bg-pink-950/80 border border-pink-500/50 px-3 py-1 rounded-xl text-xs font-black text-pink-300 animate-bounce">
+                        🔥 Combo x<span id="comboMultiplier">1</span>
+                    </div>
+                    <div id="timerContainer" class="hidden bg-cyan-950/80 border border-cyan-500/50 px-3 py-1 rounded-xl text-xs font-black text-neonBlue">
+                        ⏱️ المتبقي: <span id="timerText">15</span>ث
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 1 View: Learn Cards -->
+            <div id="stage1View" class="glass-card p-6 rounded-3xl space-y-5 hidden glow-blue">
+                <div class="text-center">
+                    <h4 class="text-xl font-bold text-neonBlue mb-1">المرحلة الأولى: افهم مفهوم "الكساحة" 💡</h4>
+                    <p class="text-xs text-slate-300">انقر على البطاقات واستكشف كيفاش تعبّر الكساحة في شعر 3ème!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div onclick="flipLearnCard(this)" class="cursor-pointer bg-slate-900/90 p-5 rounded-2xl border border-purple-500/30 hover:border-pink-500 transition duration-300 text-right space-y-2">
+                        <div class="text-neonPink font-black text-sm flex justify-between items-center">
+                            <span><i class="fa-solid fa-skull-crossbones ml-1"></i> الكساحة ≠ قلة الأدب</span>
+                            <span class="text-[10px] text-slate-400">اضغط للتفاصيل 👆</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">هي أنفة، شجاعة، ورفض الخضوع أو الهوان في الصحراء.</p>
+                        <div class="hidden detail-text text-xs text-yellow-300 pt-2 border-t border-slate-800">
+                            الشاعر الجاهلي إذا ما كانش كاسح ومستعد يدافع على قومه، يضيع حقه وحق قبيلته!
+                        </div>
+                    </div>
+
+                    <div onclick="flipLearnCard(this)" class="cursor-pointer bg-slate-900/90 p-5 rounded-2xl border border-purple-500/30 hover:border-cyan-500 transition duration-300 text-right space-y-2">
+                        <div class="text-neonBlue font-black text-sm flex justify-between items-center">
+                            <span><i class="fa-solid fa-fire-flame-curved ml-1"></i> الشاهد الأسطوري</span>
+                            <span class="text-[10px] text-slate-400">اضغط للتفاصيل 👆</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">عمرو بن كلثوم: "فَنَجْهَلَ فَوْقَ جَهْلِ الجَاهِلِيْنَا"</p>
+                        <div class="hidden detail-text text-xs text-cyan-300 pt-2 border-t border-slate-800">
+                            يعني: اللي يعتدي علينا بجهل، نردوا عليه بقوة وجهل أشد وأقسى! أوج الفخر الجاهلي.
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="finishStage1()" class="btn-neon w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-slate-950 font-black py-3.5 rounded-2xl shadow-lg">
+                    فهمت المعنى! تعدّى للتحدي التالي 🚀
+                </button>
+            </div>
+
+            <!-- Stage 2 View: Detection Radar -->
+            <div id="stage2View" class="glass-card p-6 rounded-3xl space-y-5 hidden glow-purple">
+                <div class="text-center">
+                    <h4 class="text-xl font-bold text-neonPurple mb-1">المرحلة 2: رادار الكساحة 🎯</h4>
+                    <p class="text-xs text-slate-300">اختر البيت اللي يمثّل "الكساحة والعنفوان" واخرج من بيت الرّقة والغزل!</p>
+                </div>
+
+                <div id="radarQuestionBox" class="text-center py-2">
+                    <span class="text-xs text-amber-400 font-bold block mb-2">أيّ البيتين يمثّل الكساحة الجاهلية؟</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="radarOptionsGrid">
+                    <!-- Option Buttons Rendered via JS -->
+                </div>
+            </div>
+
+            <!-- Stage 3 View: Battle Quiz -->
+            <div id="stage3View" class="glass-card p-6 rounded-3xl space-y-5 hidden glow-pink">
+                <div class="text-center">
+                    <h4 class="text-xl font-bold text-neonPink mb-1">المرحلة 3: معركة الأدباء الكاسحين ⚔️</h4>
+                    <p class="text-xs text-slate-300">جاوب بسرعة قبل ما يوفى الوقت وضاعف نقاط الـ Combo!</p>
+                </div>
+
+                <!-- Verse Display -->
+                <div id="battlePoetryBox" class="bg-slate-950/90 border border-purple-500/40 p-4 rounded-2xl text-center poetry-font text-xl md:text-2xl text-amber-300 leading-relaxed shadow-inner">
+                    <!-- Verse -->
+                </div>
+
+                <h5 id="battleQuestionText" class="text-sm md:text-base font-bold text-slate-100 text-center">
+                    <!-- Question -->
+                </h5>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="battleOptionsGrid">
+                    <!-- Options -->
+                </div>
+            </div>
+
+            <!-- Stage 4 View: Verse Builder -->
+            <div id="stage4View" class="glass-card p-6 rounded-3xl space-y-5 hidden glow-yellow">
+                <div class="text-center">
+                    <h4 class="text-xl font-bold text-neonYellow mb-1">المرحلة 4: صانع الأبيات الكاسحة 🧩</h4>
+                    <p class="text-xs text-slate-300">رتب الكلمات المبعثرة لبناء بيت كاسح من برنامج الـ 3ème!</p>
+                </div>
+
+                <!-- Target Drop Slot -->
+                <div id="builderSlot" class="bg-slate-950/90 border-2 border-dashed border-yellow-500/50 p-4 rounded-2xl min-h-[70px] flex flex-wrap gap-2 items-center justify-center poetry-font text-lg text-amber-200">
+                    <span class="text-xs text-slate-500 font-sans">انقر على الكلمات بالترتيب لتكوين البيت الصحيح...</span>
+                </div>
+
+                <!-- Word Pool Chips -->
+                <div id="builderChips" class="flex flex-wrap justify-center gap-2.5 p-3 bg-slate-900/60 rounded-2xl border border-slate-800">
+                    <!-- Word Chips -->
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="resetBuilder()" class="w-1/3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-xl text-xs transition">
+                        <i class="fa-solid fa-rotate-left ml-1"></i> اعادة الترتيب
+                    </button>
+                    <button onclick="checkBuilderAnswer()" class="w-2/3 btn-neon bg-gradient-to-r from-neonYellow to-amber-500 text-slate-950 font-black py-3 rounded-xl text-sm shadow-md">
+                        ثبّت البيت الكاسح <i class="fa-solid fa-check mr-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feedback Modal / Explanation Strip -->
+            <div id="feedbackBox" class="hidden glass-card p-4 rounded-2xl border border-purple-500/40 text-xs md:text-sm text-right space-y-2">
+                <div id="feedbackTitle" class="font-bold"></div>
+                <div id="feedbackText" class="text-slate-300"></div>
+                <button id="nextStepBtn" onclick="nextStep()" class="btn-neon bg-purple-600 hover:bg-purple-500 text-white font-black px-5 py-2 rounded-xl text-xs float-left">
+                    واصل الرحلة <i class="fa-solid fa-arrow-left mr-1"></i>
+                </button>
+                <div class="clear-both"></div>
+            </div>
+
+        </div>
+
+        <!-- 3. END GAME / CERTIFICATE SCREEN -->
+        <div id="endScreen" class="w-full glass-card rounded-3xl p-6 md:p-10 text-center glow-pink hidden my-auto">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-pink-500 to-yellow-400 p-1 mx-auto mb-4 glow-yellow">
+                <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-neonYellow text-4xl">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neonYellow via-pink-400 to-neonBlue mb-2 poetry-font">
+                وسام "كاسح الأدب العربي" 🏆
+            </h2>
+            <p class="text-xs md:text-sm text-slate-300 mb-6 max-w-md mx-auto">
+                مبروك لتلميذ السنة 3ème! أثبتّ فهمك العميق لمفهوم الكساحة والشواهد الشعرية الجاهلية.
+            </p>
+
+            <!-- Results Summary Grid -->
+            <div class="grid grid-cols-3 gap-3 max-w-md mx-auto mb-6">
+                <div class="bg-slate-900/90 p-3 rounded-2xl border border-pink-500/30">
+                    <div class="text-[10px] text-slate-400">النقاط الكلية</div>
+                    <div id="finalScore" class="text-xl font-black text-neonYellow">0</div>
+                </div>
+                <div class="bg-slate-900/90 p-3 rounded-2xl border border-cyan-500/30">
+                    <div class="text-[10px] text-slate-400">أعلى Combo</div>
+                    <div id="finalCombo" class="text-xl font-black text-neonBlue">x0</div>
+                </div>
+                <div class="bg-slate-900/90 p-3 rounded-2xl border border-purple-500/30">
+                    <div class="text-[10px] text-slate-400">أعلى النتيجة</div>
+                    <div id="highScoreText" class="text-xl font-black text-neonPink">0</div>
+                </div>
+            </div>
+
+            <!-- Motivational Summary Banner -->
+            <div class="bg-purple-950/60 p-4 rounded-2xl border border-purple-500/40 text-xs text-amber-200 leading-relaxed mb-6 max-w-md mx-auto">
+                "الكساحة في الـ 3ème هي عنوان الشجاعة والصمود في بيئة صحراوية قاسية، وتجلى ذلك في جزالة الألفاظ وفخامة المعاني!"
+            </div>
+
+            <button onclick="startGame()" class="btn-neon bg-gradient-to-r from-neonPink via-purple-600 to-neonBlue text-white font-black text-base px-8 py-3.5 rounded-2xl shadow-xl">
+                <i class="fa-solid fa-rotate-right ml-2"></i> العب مرة أخرى وحطّم الرقم القياسي!
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Sound Effects Synthesizer (Web Audio API) -->
+    <script>
+        const AudioSynth = {
+            ctx: null,
+            muted: false,
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                }
+            },
+            playClick() {
+                if (this.muted) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+                gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.08);
+            },
+            playCorrect() {
+                if (this.muted) return;
+                this.init();
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.1, this.ctx.currentTime + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.08 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(this.ctx.currentTime + idx * 0.08);
+                    osc.stop(this.ctx.currentTime + idx * 0.08 + 0.25);
+                });
+            },
+            playWrong() {
+                if (this.muted) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(110, this.ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            playVictory() {
+                if (this.muted) return;
+                this.init();
+                const arpeggio = [440, 554.37, 659.25, 880, 1108.73];
+                arpeggio.forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.12, this.ctx.currentTime + idx * 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.1 + 0.4);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(this.ctx.currentTime + idx * 0.1);
+                    osc.stop(this.ctx.currentTime + idx * 0.1 + 0.4);
+                });
+            }
+        };
+
+        function toggleMute() {
+            AudioSynth.muted = !AudioSynth.muted;
+            const icon = document.getElementById('soundIcon');
+            icon.className = AudioSynth.muted ? 'fa-solid fa-volume-xmark text-red-400' : 'fa-solid fa-volume-high text-neonBlue';
+        }
+    </script>
+
+    <!-- Game Engine Data & Logic -->
+    <script>
+        // Game Stage Data
+        const stage2RadarData = [
+            {
+                prompt: "أما بيت فيهم يجسّد 'الكساحة والأنفة الجاهلية'؟",
+                optionA: "أَلا لا يَجْهَلَنَّ أَحَدٌ عَلَيْنَا ... فَنَجْهَلَ فَوْقَ جَهْلِ الجَاهِلِيْنَا",
+                optionB: "أَلا يا صَبا نَجْدٍ مَتى هِجْتَ مِنْ نَجْدِ ... لَقَدْ زادَني مَسْراكَ وَجْداً عَلى وَجْدِ",
+                correct: 'A',
+                explanation: "صحيت يا معلم! بيت عمرو بن كلثوم يفيض بالصمود والرد القاسي، بينما البيت الثاني غزل ورقة."
+            },
+            {
+                prompt: "شنوّة البيت اللي يعكس قسوة الشاعر وصلابته أمام المخاطر؟",
+                optionA: "وَإِنِّي لَشَكَّاكٌ بِنَحْرِي أَبِيَّهَ ... إِذَا نَزَلَتْ إِحْدَى المَكَرُوهِ وَالعَظَائِمِ",
+                optionB: "وَمَا حُبُّ الدِّيَارِ شَغَفْنَ قَلْبِي ... وَلَكِنْ حُبُّ مَنْ سَكَنَ الدِّيَارَا",
+                correct: 'A',
+                explanation: "ممتاز! الشاعر يفتخر بإقدامه وشدته عند الوقوع في المصائب والمكاره."
+            }
+        ];
+
+        const stage3BattleData = [
+            {
+                poetry: "وَنَشْرَبُ إِنْ وَرَدْنَا المَاءَ صَفْواً ... وَيَشْرَبُ غَيْرُنَا كَدَراً وَطِيْنَا",
+                question: "ما هو البُعد الذي تبرزه هذه الكساحة في شعر الفخر الجاهلي؟",
+                options: [
+                    "السيطرة والهيبة الساحقة للقبيلة على الموارد",
+                    "التسامح والمشاركة العادلة للماء",
+                    "البكاء على جفاف العيون والآبار",
+                    "الهروب إلى مناطق الواحات"
+                ],
+                correct: 0,
+                explanation: "يعطيك الصحة! المعنى هو الهيبة المطلقة والاستئثار بالأفضل بالقوة."
+            },
+            {
+                poetry: "إِذَا بَلَغَ الفِطَامَ لَنَا صَبِيٌّ ... تَخِرُّ لَهُ الجَبَابِرُ سَاجِدِيْنَا",
+                question: "المبالغة الفائقة في هذا البيت تدلّ على:",
+                options: [
+                    "الخوف والتردد من الأعداء",
+                    "تربية الأطفال على الهدوء",
+                    "العنفوان والكساحة الموروثة منذ الصغر",
+                    "مدح ملوك الجاهلية وتقديسهم"
+                ],
+                correct: 2,
+                explanation: "برافو! الشاعر يبالغ لبيان أن القوة والكساحة تجري في دماء القبيلة صغاراً وكباراً."
+            },
+            {
+                poetry: "وَالخَيْلُ وَاللَّيْلُ وَالبَيْدَاءُ تَعْرِفُنِي ... وَالسَّيْفُ وَالرَّمْحُ وَالقِرْطَاسُ وَالقَلَمُ",
+                question: "الكساحة في هذا البيت الشهير للمتنبي تجمع بين:",
+                options: [
+                    "فروسية القتال وبلاغة الفكر والقلم",
+                    "الوحشة في الليل المظلم",
+                    "الخوف من ركوب الخيل",
+                    "كتابة الرسائل للصلح"
+                ],
+                correct: 0,
+                explanation: "رائع! تجمع بين القوة البدنية الميدانية والكبرياء العلمي والأدبي."
+            }
+        ];
+
+        const stage4BuilderData = [
+            {
+                target: ["أَلا", "لا", "يَجْهَلَنَّ", "أَحَدٌ", "عَلَيْنَا", "فَنَجْهَلَ", "فَوْقَ", "جَهْلِ", "الجَاهِلِيْنَا"],
+                hint: "بيت المعلقة لعمرو بن كلثوم في التهديد والفخر"
+            },
+            {
+                target: ["وَنَشْرَبُ", "إِنْ", "وَرَدْنَا", "المَاءَ", "صَفْواً", "وَيَشْرَبُ", "غَيْرُنَا", "كَدَراً", "وَطِيْنَا"],
+                hint: "بيت السيطرة والهيبة على موارد الماء"
+            }
+        ];
+
+        // State variables
+        let score = 0;
+        let combo = 0;
+        let maxCombo = 0;
+        let currentStage = 1; // 1 to 4
+        let subIndex = 0;
+        let timer = null;
+        let timeLeft = 15;
+        let selectedWords = [];
+
+        function startGame() {
+            score = 0;
+            combo = 0;
+            maxCombo = 0;
+            currentStage = 1;
+            subIndex = 0;
+
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('endScreen').classList.add('hidden');
+            document.getElementById('arenaScreen').classList.remove('hidden');
+            document.getElementById('arenaScreen').classList.add('flex');
+
+            updateHeaderScore();
+            loadStage();
+        }
+
+        function updateHeaderScore() {
+            document.getElementById('headerScore').innerText = score;
+        }
+
+        function updateComboUI() {
+            const container = document.getElementById('comboContainer');
+            const mult = document.getElementById('comboMultiplier');
+            if (combo > 1) {
+                container.classList.remove('hidden');
+                mult.innerText = combo;
+                if (combo > maxCombo) maxCombo = combo;
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function loadStage() {
+            // Hide all sub views
+            document.getElementById('stage1View').classList.add('hidden');
+            document.getElementById('stage2View').classList.add('hidden');
+            document.getElementById('stage3View').classList.add('hidden');
+            document.getElementById('stage4View').classList.add('hidden');
+            document.getElementById('feedbackBox').classList.add('hidden');
+            document.getElementById('timerContainer').classList.add('hidden');
+            clearInterval(timer);
+
+            const badge = document.getElementById('stageBadge');
+            const title = document.getElementById('stageTitle');
+
+            if (currentStage === 1) {
+                badge.innerText = "المرحلة 1 من 4";
+                title.innerText = "دليل مفهوم الكساحة";
+                document.getElementById('stage1View').classList.remove('hidden');
+            } else if (currentStage === 2) {
+                badge.innerText = "المرحلة 2 من 4";
+                title.innerText = "رادار الكساحة";
+                document.getElementById('stage2View').classList.remove('hidden');
+                loadStage2();
+            } else if (currentStage === 3) {
+                badge.innerText = "المرحلة 3 من 4";
+                title.innerText = "معركة الأدباء الكاسحين";
+                document.getElementById('stage3View').classList.remove('hidden');
+                document.getElementById('timerContainer').classList.remove('hidden');
+                loadStage3();
+            } else if (currentStage === 4) {
+                badge.innerText = "المرحلة 4 من 4";
+                title.innerText = "صانع الأبيات الكاسحة";
+                document.getElementById('stage4View').classList.remove('hidden');
+                loadStage4();
+            }
+        }
+
+        // --- STAGE 1 LOGIC ---
+        function flipLearnCard(card) {
+            AudioSynth.playClick();
+            const detail = card.querySelector('.detail-text');
+            if (detail) detail.classList.toggle('hidden');
+        }
+
+        function finishStage1() {
+            AudioSynth.playCorrect();
+            score += 50;
+            updateHeaderScore();
+            currentStage = 2;
+            subIndex = 0;
+            loadStage();
+        }
+
+        // --- STAGE 2 LOGIC ---
+        function loadStage2() {
+            const data = stage2RadarData[subIndex];
+            const grid = document.getElementById('radarOptionsGrid');
+            grid.innerHTML = '';
+
+            const opts = [
+                { key: 'A', text: data.optionA },
+                { key: 'B', text: data.optionB }
+            ];
+
+            opts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-neon p-5 rounded-2xl bg-slate-900/90 border border-purple-500/30 text-right font-serif text-lg text-amber-200 hover:border-neonPink transition';
+                btn.innerHTML = `<span class="block text-xs font-sans text-slate-400 mb-1">خيار ${opt.key}:</span> ${opt.text}`;
+                btn.onclick = () => checkStage2Answer(opt.key);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkStage2Answer(ans) {
+            const data = stage2RadarData[subIndex];
+            const feedbackBox = document.getElementById('feedbackBox');
+            const fTitle = document.getElementById('feedbackTitle');
+            const fText = document.getElementById('feedbackText');
+
+            feedbackBox.classList.remove('hidden');
+
+            if (ans === data.correct) {
+                AudioSynth.playCorrect();
+                combo++;
+                score += 30 * combo;
+                fTitle.className = "text-neonBlue font-bold flex items-center gap-2";
+                fTitle.innerHTML = `<i class="fa-solid fa-circle-check"></i> يا معلم رادار كاسح! (+${30 * combo} نقطة)`;
+            } else {
+                AudioSynth.playWrong();
+                combo = 0;
+                fTitle.className = "text-neonPink font-bold flex items-center gap-2";
+                fTitle.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ركّز يا ابن الـ 3ème! البيت هذاك رقيق غزل مش كساحة!`;
+            }
+
+            updateComboUI();
+            updateHeaderScore();
+            fText.innerText = data.explanation;
+        }
+
+        // --- STAGE 3 LOGIC ---
+        function loadStage3() {
+            if (subIndex >= stage3BattleData.length) {
+                currentStage = 4;
+                subIndex = 0;
+                loadStage();
+                return;
+            }
+
+            const data = stage3BattleData[subIndex];
+            document.getElementById('battlePoetryBox').innerText = data.poetry;
+            document.getElementById('battleQuestionText').innerText = data.question;
+
+            const grid = document.getElementById('battleOptionsGrid');
+            grid.innerHTML = '';
+
+            data.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-neon p-4 rounded-xl bg-slate-900/90 border border-slate-700/60 text-right text-xs md:text-sm font-bold text-slate-200 hover:border-cyan-400 transition';
+                btn.innerText = opt;
+                btn.onclick = () => checkStage3Answer(idx);
+                grid.appendChild(btn);
+            });
+
+            // Timer Logic
+            timeLeft = 12;
+            document.getElementById('timerText').innerText = timeLeft;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timerText').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    checkStage3Answer(-1); // Timeout
+                }
+            }, 1000);
+        }
+
+        function checkStage3Answer(selectedIndex) {
+            clearInterval(timer);
+            const data = stage3BattleData[subIndex];
+            const feedbackBox = document.getElementById('feedbackBox');
+            const fTitle = document.getElementById('feedbackTitle');
+            const fText = document.getElementById('feedbackText');
+
+            feedbackBox.classList.remove('hidden');
+
+            if (selectedIndex === data.correct) {
+                AudioSynth.playCorrect();
+                combo++;
+                score += 40 * combo;
+                fTitle.className = "text-neonYellow font-bold flex items-center gap-2";
+                fTitle.innerHTML = `<i class="fa-solid fa-bolt"></i> إجابة كاسحة وسريعة! (+${40 * combo} نقطة)`;
+            } else {
+                AudioSynth.playWrong();
+                combo = 0;
+                fTitle.className = "text-neonPink font-bold flex items-center gap-2";
+                fTitle.innerHTML = selectedIndex === -1 ? 
+                    `<i class="fa-solid fa-hourglass-end"></i> وفى الوقت! ركّز أسرع في البيت الجاي!` :
+                    `<i class="fa-solid fa-shield-xmark"></i> إجابة خاطئة! كاسح الشعراء باغتكم!`;
+            }
+
+            updateComboUI();
+            updateHeaderScore();
+            fText.innerText = data.explanation;
+        }
+
+        // --- STAGE 4 LOGIC ---
+        function loadStage4() {
+            if (subIndex >= stage4BuilderData.length) {
+                endGame();
+                return;
+            }
+
+            const data = stage4BuilderData[subIndex];
+            selectedWords = [];
+            renderBuilderSlot();
+
+            // Shuffle words
+            const shuffled = [...data.target].sort(() => Math.random() - 0.5);
+            const pool = document.getElementById('builderChips');
+            pool.innerHTML = '';
+
+            shuffled.forEach((word) => {
+                const chip = document.createElement('button');
+                chip.className = 'word-chip bg-slate-800 hover:bg-purple-900 text-neonYellow border border-purple-500/40 px-3.5 py-2 rounded-xl text-sm font-serif font-bold shadow-md';
+                chip.innerText = word;
+                chip.onclick = () => {
+                    AudioSynth.playClick();
+                    selectedWords.push(word);
+                    chip.disabled = true;
+                    chip.classList.add('opacity-30', 'cursor-not-allowed');
+                    renderBuilderSlot();
+                };
+                pool.appendChild(chip);
+            });
+        }
+
+        function renderBuilderSlot() {
+            const slot = document.getElementById('builderSlot');
+            if (selectedWords.length === 0) {
+                slot.innerHTML = `<span class="text-xs text-slate-500 font-sans">انقر على الكلمات بالترتيب لتكوين البيت الصحيح...</span>`;
+                return;
+            }
+
+            slot.innerHTML = '';
+            selectedWords.forEach((word) => {
+                const span = document.createElement('span');
+                span.className = 'bg-purple-900/80 border border-pink-500/50 text-amber-200 px-3 py-1 rounded-lg shadow-sm';
+                span.innerText = word;
+                slot.appendChild(span);
+            });
+        }
+
+        function resetBuilder() {
+            AudioSynth.playClick();
+            loadStage4();
+        }
+
+        function checkBuilderAnswer() {
+            const data = stage4BuilderData[subIndex];
+            const userStr = selectedWords.join(' ');
+            const targetStr = data.target.join(' ');
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            const fTitle = document.getElementById('feedbackTitle');
+            const fText = document.getElementById('feedbackText');
+            feedbackBox.classList.remove('hidden');
+
+            if (userStr === targetStr) {
+                AudioSynth.playCorrect();
+                combo++;
+                score += 50 * combo;
+                fTitle.className = "text-neonBlue font-bold flex items-center gap-2";
+                fTitle.innerHTML = `<i class="fa-solid fa-feather-pointed"></i> بيت كاسح وموزون 100%! (+${50 * combo} نقطة)`;
+                fText.innerText = "يعطيك الصحة! هذا بيت جاهلي أسطوري يُدرّس في برنامج السنة الثالثة ثانوي.";
+            } else {
+                AudioSynth.playWrong();
+                combo = 0;
+                fTitle.className = "text-neonPink font-bold flex items-center gap-2";
+                fTitle.innerHTML = `<i class="fa-solid fa-puzzle-piece"></i> الترتيب مش صحّيح، عاود جرب!`;
+                fText.innerText = `الترتيب الصحيح هو: "${targetStr}"`;
+            }
+
+            updateComboUI();
+            updateHeaderScore();
+        }
+
+        // Global Step Advancement
+        function nextStep() {
+            document.getElementById('feedbackBox').classList.add('hidden');
+
+            if (currentStage === 2) {
+                subIndex++;
+                if (subIndex >= stage2RadarData.length) {
+                    currentStage = 3;
+                    subIndex = 0;
+                    loadStage();
+                } else {
+                    loadStage2();
+                }
+            } else if (currentStage === 3) {
+                subIndex++;
+                loadStage3();
+            } else if (currentStage === 4) {
+                subIndex++;
+                loadStage4();
+            }
+        }
+
+        // End Game & HighScore Tracking
+        function endGame() {
+            AudioSynth.playVictory();
+            document.getElementById('arenaScreen').classList.add('hidden');
+            document.getElementById('arenaScreen').classList.remove('flex');
+            document.getElementById('endScreen').classList.remove('hidden');
+
+            document.getElementById('finalScore').innerText = score;
+            document.getElementById('finalCombo').innerText = `x${maxCombo}`;
+
+            // LocalStorage HighScore
+            let storedHigh = localStorage.getItem('kasaha_highscore') || 0;
+            if (score > storedHigh) {
+                storedHigh = score;
+                localStorage.setItem('kasaha_highscore', storedHigh);
+            }
+            document.getElementById('highScoreText').innerText = storedHigh;
+        }
+    </script>
+</body>
+</html>
